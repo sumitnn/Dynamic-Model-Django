@@ -1,0 +1,39 @@
+{% extends 'common.html' %}
+
+{% block content %}
+<div class="container mt-5 " style="width: 40%;">
+    <h2 class="text-center">Table ({{modal_name}})</h2>
+    <div class="container mt-5">
+    <form method="post">
+        {% csrf_token %}
+     
+        {% for key,val in data.fields.items %}
+        <div class="m-3">
+            {% if val == "int" %}
+            <label for="modal_name" class="form-label">{{key}}</label>
+            <input type="number" class="form-control" id="modal_name" name={{key}} required>
+            {% elif val == "bool" %}
+            <label for="bool" class="form-label">{{key}}</label>
+           <select name={{key}} id="bool">
+            <option value="True">True</option>
+            <option value="False">False</option>
+           </select>
+            {% else %}
+            <label for="modal_name" class="form-label">{{key}}</label>
+            <input type="text" class="form-control" id="modal_name" name={{key}} required>
+            {% endif %}
+        </div>
+        {% endfor %}
+       
+        <button type="submit" class="btn btn-warning">Add Data in {{modal_name}}</button>
+        <a href="/show-data/{{modal_name}}" class="btn btn-success">Show All Data ({{modal_name}})</a>
+    </form>
+
+    </div>
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'common.html' %}
+
+{% block content %}
+<div class="container mt-5 " style="width: 40%;">
+    <h2 class="text-center">Create New Model</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="modal_name" class="form-label">Modal Name</label>
+            <input type="text" class="form-control" id="modal_name" name="model_name" required >
+            
+        </div>
+        <p >Fields</p>
+        <p class="text-danger ">By default charfield selected !</p>
+        
+        <div id="form-rows">
+            <div class="form-row mb-3" id="row-1">
+                <div class="col">
+                    <input type="text" class="form-control" name="field_name" placeholder="Field Name" required>
+                </div>
+                <div class="col mt-1">
+                    <select class="form-control" name="field_type" >
+                        <option value="CharField">CharField</option>
+                        <option value="IntegerField">IntegerField</option>
+                        <option value="BooleanField">BooleanField</option>
+                    </select>
+                </div>
+                <div class="col-auto mt-2">
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="add-row">Add New Field</button>
+        
+        <button type="submit" class="btn btn-warning">Add New Modal</button>
+    </form>
+
+</div>
+
+{% endblock %}
+    
+{% block script %}
+
+
+    $(document).ready(function () {
+        var rowCount = 1;
+
+        $('#add-row').click(function () {
+            rowCount++;
+            var newRow = `
+            <div class="form-row mb-3" id="row-${rowCount}">
+                <div class="col">
+                    <input type="text" class="form-control" name="field_name" placeholder="Field Name" required>
+                </div>
+                <div class="col mt-1">
+                    <select class="form-control" name="field_type">
+                        <option value="CharField">CharField</option>
+                        <option value="IntegerField">IntegerField</option>
+                        <option value="BooleanField">BooleanField</option>
+                        
+                    </select>
+                </div>
+                <div class="col-auto mt-2">
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </div>
+            </div>
+        `;
+            $('#form-rows').append(newRow);
+        });
+
+        $(document).on('click', '.remove-row', function () {
+            $(this).closest('.form-row').remove();
+        });
+    });
+
+{% endblock %}

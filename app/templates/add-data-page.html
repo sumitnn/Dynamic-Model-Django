@@ -1,0 +1,40 @@
+{% extends 'common.html' %}
+
+{% block content %}
+<div class="container mt-5 " style="width: 40%;">
+    <h2 class="text-center">Add Data in Model</h2>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Modal Name</th>
+                    <th scope="col">Add Data</th>
+                    <th scope="col">Show Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if modal_names %}
+                {% for val in modal_names %}
+                <tr>
+                    <td>{{val}}</td>
+                    <td><a class="btn btn-outline-warning" href="/add-data/{{val}}">Add Data</a></td>
+                    <td><a class="btn btn-outline-primary" href="/show-data/{{val}}">Show Data</a></td>
+                    
+                    
+                </tr>
+                {% endfor %}
+                {% else %}
+                <p>No Data Found</p>
+                {% endif %}
+                
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

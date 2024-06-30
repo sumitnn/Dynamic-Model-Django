@@ -1,0 +1,40 @@
+{% extends 'common.html' %}
+
+{% block content %}
+<div class="container mt-5 " style="width: 40%;">
+    <h2 class="text-center"> {{model_name}} Table</h2>
+    <div class="container mt-5">
+    
+<table class="table">
+    <thead>
+        {% if table_head %}
+        <tr>
+            {% for val in table_head %}
+            <th scope="col">{{val}}</th>
+            {% endfor %}
+        </tr>
+        {% endif %}
+    </thead>
+    <tbody>
+        {% if data %}
+    {% for obj in data %}
+    <tr>
+        {% for key, val in obj.items %}
+        <td>{{ val }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+        {% else %}
+        <p>No Data Found in {{model_name}} table </p>
+        {% endif %}
+
+    </tbody>
+</table>
+    </div>
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
